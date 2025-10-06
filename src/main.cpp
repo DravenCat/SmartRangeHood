@@ -153,13 +153,8 @@ void printSensors() {
     Serial.printf("AIN:   %d (%f V)\n", SensorData.AIN, SensorData.vAIN);
 
     Serial.printf("US Raw:    %f mm\n", SensorData.USDistance);
-    Serial.printf("US Comp:   %f mm\n", SensorData.USDistanceCompensated);
+    Serial.printf("Time of Flight:   %f ns\n", (SensorData.USDistance * 2.0) / 343500.0 * 1e9);
 
-    // Calculate and display speed of sound
-    if (BMEconnected || AHTconnected) {
-        float speed = range_calibration.calculateSpeedOfSound(SensorData.T, SensorData.RH, SensorData.P);
-        Serial.printf("Speed of Sound: %f mm/s\n", speed);
-    }
 }
 
 void updateDisplay() {
@@ -367,5 +362,5 @@ void loop() {
     readSensors();
     printSensors();
     updateDisplay();
-    delay(800);
+    delay(1000);
 }
