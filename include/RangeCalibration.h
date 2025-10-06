@@ -9,8 +9,11 @@ class RangeCalibration {
     float compensateUltrasonicDistance(float rawDistance, float temperature, float humidity, float pressure);
 
     private:
-    const float speed_of_sound_default = 343.5;
-    const float temperature_default = 20.0;
+    const float speed_of_sound_default = 331.45;  // m/s
+    const float temperature_default = 20.0;  // C
+    const float humidity_default = 0.0;  // %
+    const float pressure_default = 101.325;   // kPa
+
 };
 
 
