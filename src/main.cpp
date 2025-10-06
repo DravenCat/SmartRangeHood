@@ -34,6 +34,7 @@ Adafruit_AHTX0 aht;
 Adafruit_ADS1015 ads;
 BMA400 accelerometer;
 RCWL_1X05 ultrasonic;
+RangeCalibration range_calibration;
 
 //Location In Memory to Store Sensor Results (Stored inside a Struct)
 
@@ -118,7 +119,7 @@ void readSensors() {
 
     // Apply T/RH/P compensation to ultrasonic distance
     if (BMEconnected || AHTconnected) {
-        SensorData.USDistanceCompensated = RangeCalibration::compensateUltrasonicDistance(
+        SensorData.USDistanceCompensated = range_calibration.compensateUltrasonicDistance(
             SensorData.USDistance, SensorData.T, SensorData.RH, SensorData.P);
     } else {
         // If no environmental sensors, use raw distance
@@ -156,7 +157,7 @@ void printSensors() {
 
     // Calculate and display speed of sound
     if (BMEconnected || AHTconnected) {
-        float speed = RangeCalibration::calculateSpeedOfSound(SensorData.T, SensorData.RH, SensorData.P);
+        float speed = range_calibration.calculateSpeedOfSound(SensorData.T, SensorData.RH, SensorData.P);
         Serial.printf("Speed of Sound: %f mm/s\n", speed);
     }
 }

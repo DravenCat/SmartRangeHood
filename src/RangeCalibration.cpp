@@ -6,7 +6,7 @@ float RangeCalibration::calculateSpeedOfSound(float temperature, float humidity,
     // Base formula: v = 331.3 + 0.606 * T (where T is in Celsius)
     // This gives speed in m/s, so we multiply by 1000 to get mm/s
 
-    float speedOfSound = (331.3 + 0.606 * temperature) * 1000; // mm/s
+    float speedOfSound = (speed_of_sound_default + 0.606 * temperature) * 1000; // mm/s
 
     // Optional: Add humidity correction (small effect)
     // speedOfSound += (0.0124 * humidity);
@@ -14,7 +14,7 @@ float RangeCalibration::calculateSpeedOfSound(float temperature, float humidity,
     // Optional: Add pressure correction (very small effect for typical variations)
     // speedOfSound *= (pressure / 101.325); // Normalize to standard pressure
 
-    return speedOfSound;
+    return speedOfSound;  // return mm/s
 }
 
 // Function to convert raw ultrasonic reading to compensated distance
@@ -28,5 +28,5 @@ float RangeCalibration::compensateUltrasonicDistance(float rawDistance, float te
     // Calculate compensated distance using actual speed of sound
     float compensatedDistance = (timeOfFlight_ns * 1e-9) * actualSpeed / 2.0;
 
-    return compensatedDistance;
+    return compensatedDistance; // return mm
 }
