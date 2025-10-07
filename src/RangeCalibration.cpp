@@ -6,13 +6,13 @@ float RangeCalibration::calculateSpeedOfSound(float temperature, float humidity,
     // Base formula: v = 331.3 + 0.606 * T (where T is in Celsius)
     // This gives speed in m/s, so we multiply by 1000 to get mm/s
 
-    float speedOfSound = (speed_of_sound_default + 0.606 * temperature) * 1000; // mm/s
+    // float speedOfSound = (speed_of_sound_default + 0.606 * temperature) * 1000; // mm/s
 
-    // Optional: Add humidity correction (small effect)
-    // speedOfSound += (0.0124 * humidity);
-
-    // Optional: Add pressure correction (very small effect for typical variations)
-    // speedOfSound *= (pressure / 101.325); // Normalize to standard pressure
+    float speedOfSound = speed_of_sound_default;
+    speedOfSound += a_t * (temperature - temperature_default);
+    speedOfSound += a_rh * (humidity - humidity_default);
+    speedOfSound += a_p * (pressure - pressure_default);
+    speedOfSound *= 1000;
 
     return speedOfSound;  // return mm/s
 }

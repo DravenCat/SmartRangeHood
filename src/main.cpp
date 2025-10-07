@@ -153,6 +153,7 @@ void printSensors() {
     Serial.printf("AIN:   %d (%f V)\n", SensorData.AIN, SensorData.vAIN);
 
     Serial.printf("US Raw:    %f mm\n", SensorData.USDistance);
+    Serial.printf("US Compensated: %f mm\n", SensorData.USDistanceCompensated);
     Serial.printf("Time of Flight:   %f ns\n", (SensorData.USDistance * 2.0) / 343500.0 * 1e9);
 
 }
@@ -229,17 +230,12 @@ void updateDisplay() {
     tft.print("Ultrasonic\n");
     tft.setTextColor(VALUE_COLOUR);
 
-    // Show raw distance
+    // Show Ultrasonic Distance
     tft.setCursor(COLLUMN_ONE_X, 128);
     memset(tempStringSorage, 0, sizeof(tempStringSorage));
-    sprintf(tempStringSorage, "R:%5.0f mm\n", SensorData.USDistance);
+    // sprintf(tempStringSorage, "R:%5.0f mm\n", SensorData.USDistance);    // Show raw distance
+    sprintf(tempStringSorage, "CR:%5.0f mm\n", SensorData.USDistanceCompensated);  // Show compensated distance
     tft.print(tempStringSorage);
-
-    // Show compensated distance on next line
-    // tft.setCursor(COLLUMN_ONE_X, 143);
-    // memset(tempStringSorage, 0, sizeof(tempStringSorage));
-    // sprintf(tempStringSorage, "C:%5.0f mm\n", SensorData.USDistanceCompensated);
-    // tft.print(tempStringSorage);
 
     //Write BMA400 Values to Screen
     tft.setCursor(COLLUMN_TWO_X, 83);
