@@ -2,6 +2,9 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
+# device_monitor_file_path = 'device-monitor-modified.xlsx'
+device_monitor_file_path = 'device-monitor-library.xlsx'
+
 def calculate_regression_coefficients():
     """
     根据excel数据计算声速关于温度、湿度和压力的线性回归系数
@@ -13,7 +16,7 @@ def calculate_regression_coefficients():
     """
 
     # 读取Excel文件
-    df = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')
+    df = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')
 
     # 提取需要的列数据
     # 注意：real_speed_of_sound列需要计算，因为Excel中显示的是公式
@@ -63,13 +66,13 @@ def main():
         print(f"其中: delta_t = t - 20, delta_rh = rh - 0, delta_p = p - 100")
 
         # 计算R²分数
-        real_distance = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')['real_distance(mm)'].values
-        time_of_flight = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')['time_of_flight(ns)'].values
+        real_distance = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')['real_distance(mm)'].values
+        time_of_flight = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')['time_of_flight(ns)'].values
         real_speed_of_sound_m_per_s = (real_distance / time_of_flight) * 1e9 * 2 / 1000
 
-        temperature = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')['temperature(C)'].values
-        humidity = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')['humidity(%)'].values / 100
-        pressure = pd.read_excel('device-monitor-modified.xlsx', sheet_name='Sheet1')['pressure(kPa)'].values
+        temperature = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')['temperature(C)'].values
+        humidity = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')['humidity(%)'].values / 100
+        pressure = pd.read_excel(device_monitor_file_path, sheet_name='Sheet1')['pressure(kPa)'].values
 
         delta_t = temperature - 20
         delta_rh = humidity - 0
@@ -84,7 +87,7 @@ def main():
 
     except Exception as e:
         print(f"处理数据时出错: {e}")
-        print("请确保device-monitor-modified.xlsx文件存在且格式正确")
+        print("请确保device_monitor_file_path文件存在且格式正确")
 
 if __name__ == "__main__":
     main()
