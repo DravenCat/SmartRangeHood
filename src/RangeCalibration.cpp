@@ -35,7 +35,7 @@ float RangeCalibration::compensateUltrasonicDistance(float rawDistance, float te
     // Calculate compensated distance using actual speed of sound
 #ifndef USE_DISTANCE_MODEL
         float compensatedDistance = (timeOfFlight_ns * 1e-9) * actualSpeed / 2.0;
-    }
+
 #endif
 
 #ifdef USE_DISTANCE_MODEL
