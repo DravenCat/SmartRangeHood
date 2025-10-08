@@ -2,3 +2,4 @@
 logs
 tools/*.txt
 tools/*.xlsx
+tools/test.py
