@@ -1,2 +1,4 @@
 .pio
 logs
+tools/*.txt
+tools/*.xlsx
