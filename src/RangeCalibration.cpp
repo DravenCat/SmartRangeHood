@@ -40,7 +40,7 @@ float RangeCalibration::compensateUltrasonicDistance(float rawDistance, float te
     if (USE_DISTANCE_MODEL) {
         compensatedDistance = a_0 + a_1 * timeOfFlight_ns;
         compensatedDistance += b_0 * delta_t * timeOfFlight_ns;
-        compensatedDistance += b_1 * delta_rh * timeOfFlight_ns;
+        compensatedDistance += b_1 * delta_rh * timeOfFlight_ns / 100;
         compensatedDistance += b_2 * delta_p * timeOfFlight_ns;
         compensatedDistance += b_3 * delta_t;
     }

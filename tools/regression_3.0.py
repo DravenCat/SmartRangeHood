@@ -104,6 +104,18 @@ def main():
         for i in range(len(y)):
             print(f"{y[i]:.1f}        | {y_pred[i]:.1f}        | {residuals[i]:.2f}    | {relative_errors[i]:.2f}%")
 
+        for i in range(len(X)):
+            if i == 12:
+                print(f"{X[i][1]} {X[i][2]} {X[i][3]} {X[i][4]} {X[i][5]} Y: {y[i]} ypred: {y_pred[i]}")
+                print(f"{a0:.6f}  {a1:.6f} {b0:.6f} {b1:.6f} {b2:.6f} {b3:.6f}")
+                print(f"{a0}")
+                print(f"{a0 + a1 *X[i][1]}")
+                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2]}")
+                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3]} {b1 * X[i][3] } {b1} {X[i][3]}")
+                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3] + b2 * X[i][4] }")
+                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3] + b2 * X[i][4] + b3 * X[i][5]}")
+
+
     except Exception as e:
         print(f"处理数据时出错: {e}")
         print("请确保file_path文件存在且格式正确")
