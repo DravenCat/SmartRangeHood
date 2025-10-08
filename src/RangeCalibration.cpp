@@ -1,6 +1,6 @@
 #include "RangeCalibration.h"
 
-#define USE_DISTANCE_MODEL true
+#define USE_DISTANCE_MODEL
 // #define USE_MODEL_1 1
 
 
@@ -33,17 +33,17 @@ float RangeCalibration::compensateUltrasonicDistance(float rawDistance, float te
     float actualSpeed = calculateSpeedOfSound(temperature, humidity, pressure);
 
     // Calculate compensated distance using actual speed of sound
-    float compensatedDistance = 0;
-    if (!USE_DISTANCE_MODEL) {
-        compensatedDistance = (timeOfFlight_ns * 1e-9) * actualSpeed / 2.0;
+#ifndef USE_DISTANCE_MODEL
+        float compensatedDistance = (timeOfFlight_ns * 1e-9) * actualSpeed / 2.0;
     }
-    if (USE_DISTANCE_MODEL) {
-        compensatedDistance = a_0 + a_1 * timeOfFlight_ns;
+#endif
+
+#ifdef USE_DISTANCE_MODEL
+        float compensatedDistance = a_0 + a_1 * timeOfFlight_ns;
         compensatedDistance += b_0 * delta_t * timeOfFlight_ns;
         compensatedDistance += b_1 * delta_rh * timeOfFlight_ns / 100;
         compensatedDistance += b_2 * delta_p * timeOfFlight_ns;
-        compensatedDistance += b_3 * delta_t;
-    }
+#endif
 
     return compensatedDistance; // return mm
 }

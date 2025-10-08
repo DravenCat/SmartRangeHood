@@ -29,12 +29,11 @@ class RangeCalibration {
 
 #ifndef USE_MODEL_4
     // Model 3
-    const float a_0 = -77.576344;  // mm
-    const float a_1 = 0.000266;  // mm/ns
-    const float b_0 = -0.000003;  // mm/(ns·°C)
-    const float b_1 = -0.000136;  // mm/ns
+    const float a_0 = -22.998877;  // mm
+    const float a_1 = 0.000181;  // mm/ns
+    const float b_0 = 0.000002;  // mm/(ns·°C)
+    const float b_1 = -0.000048;  // mm/ns
     const float b_2 = 0.0;  // mm/(ns·kPa)
-    const float b_3 = 6.535015;  // mm/°C
 
 #endif
 

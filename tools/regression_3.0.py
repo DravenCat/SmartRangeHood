@@ -38,7 +38,6 @@ def calculate_extended_regression():
         delta_t * time_of_flight,      # 用于b0
         delta_rh * time_of_flight,     # 用于b1
         delta_p * time_of_flight,      # 用于b2
-        delta_t                        # 用于b3
     ])
 
     # 准备因变量 y (真实距离)
@@ -49,14 +48,14 @@ def calculate_extended_regression():
     model.fit(X, y)
 
     # 获取系数
-    a0, a1, b0, b1, b2, b3 = model.coef_
+    a0, a1, b0, b1, b2 = model.coef_
 
-    return a0, a1, b0, b1, b2, b3, model, X, y
+    return a0, a1, b0, b1, b2, model, X, y
 
 
 def main():
     try:
-        a0, a1, b0, b1, b2, b3, model, X, y = calculate_extended_regression()
+        a0, a1, b0, b1, b2, model, X, y = calculate_extended_regression()
 
         print("扩展线性回归结果:")
         print(f"a0 (常数项): {a0:.6f} mm")
@@ -64,14 +63,12 @@ def main():
         print(f"b0 (温度-飞行时间交互系数): {b0:.6f} mm/(ns·°C)")
         print(f"b1 (湿度-飞行时间交互系数): {b1:.6f} mm/ns")
         print(f"b2 (压力-飞行时间交互系数): {b2:.6f} mm/(ns·kPa)")
-        print(f"b3 (温度系数): {b3:.6f} mm/°C")
 
         print(f"\n回归模型:")
         print(f"d = {a0:.6f} + ({a1:.6f}) * (Time of Flight) + ")
         print(f"     ({b0:.6f}) * delta_t * (Time of Flight) + ")
         print(f"     ({b1:.6f}) * delta_rh * (Time of Flight) + ")
         print(f"     ({b2:.6f}) * delta_p * (Time of Flight) + ")
-        print(f"     ({b3:.6f}) * delta_t")
         print(f"其中: delta_t = t - 20, delta_rh = rh - 0, delta_p = p - 100")
 
         # 计算预测值和残差
@@ -103,17 +100,6 @@ def main():
         print("-" * 60)
         for i in range(len(y)):
             print(f"{y[i]:.1f}        | {y_pred[i]:.1f}        | {residuals[i]:.2f}    | {relative_errors[i]:.2f}%")
-
-        for i in range(len(X)):
-            if i == 12:
-                print(f"{X[i][1]} {X[i][2]} {X[i][3]} {X[i][4]} {X[i][5]} Y: {y[i]} ypred: {y_pred[i]}")
-                print(f"{a0:.6f}  {a1:.6f} {b0:.6f} {b1:.6f} {b2:.6f} {b3:.6f}")
-                print(f"{a0}")
-                print(f"{a0 + a1 *X[i][1]}")
-                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2]}")
-                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3]} {b1 * X[i][3] } {b1} {X[i][3]}")
-                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3] + b2 * X[i][4] }")
-                print(f"{a0 + a1 *X[i][1] + b0 * X[i][2] + b1 * X[i][3] + b2 * X[i][4] + b3 * X[i][5]}")
 
 
     except Exception as e:
