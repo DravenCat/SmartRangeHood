@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
-# device_monitor_file_path = 'device-monitor-modified.xlsx'
-device_monitor_file_path = 'device-monitor-library.xlsx'
+device_monitor_file_path = 'device-monitor-modified.xlsx'
+# device_monitor_file_path = 'device-monitor-library.xlsx'
 
 def calculate_regression_coefficients():
     """
