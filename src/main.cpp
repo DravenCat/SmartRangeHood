@@ -233,8 +233,8 @@ void updateDisplay() {
     // Show Ultrasonic Distance
     tft.setCursor(COLLUMN_ONE_X, 128);
     memset(tempStringSorage, 0, sizeof(tempStringSorage));
-    // sprintf(tempStringSorage, "R:%5.0f mm\n", SensorData.USDistance);    // Show raw distance
-    sprintf(tempStringSorage, "CR:%5.0f mm\n", SensorData.USDistanceCompensated);  // Show compensated distance
+    sprintf(tempStringSorage, "R:%5.0f mm\n", SensorData.USDistance);    // Show raw distance
+    // sprintf(tempStringSorage, "CR:%5.0f mm\n", SensorData.USDistanceCompensated);  // Show compensated distance
     tft.print(tempStringSorage);
 
     //Write BMA400 Values to Screen
