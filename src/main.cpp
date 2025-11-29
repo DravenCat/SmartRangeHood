@@ -240,7 +240,7 @@ void updateDisplay() {
     //Write BMA400 Values to Screen
     tft.setCursor(COLLUMN_TWO_X, 83);
     tft.setTextColor(TITLE_COLOUR);
-    tft.print("BMA400\n");
+    tft.print("AMD Yes\n");
     tft.setTextColor(VALUE_COLOUR);
 
     tft.setCursor(COLLUMN_TWO_X, 98);
@@ -304,7 +304,7 @@ void setup() {
     tft.setCursor(80, 100);
     tft.setTextColor(ST77XX_WHITE);
     tft.setTextWrap(true);
-    tft.print("UofT MIE1050");
+    tft.print("MIE1050 Group 9");
     delay(1000);
 
     //Init all sensors
